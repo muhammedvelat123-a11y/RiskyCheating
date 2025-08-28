@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روابطي الاجتماعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent, transparent 20%, 
+                rgba(192, 192, 192, 0.1), /* فضي شفاف */
+                rgba(0, 191, 255, 0.1), /* سماوي شفاف */
+                transparent 40%, transparent 60%,
+                rgba(212, 175, 55, 0.1), /* ذهبي شفاف */
+                rgba(255, 215, 0, 0.1), /* ذهبي فاتح شفاف */
+                transparent 80%, transparent);
+            background-size: 200% 200%;
+            animation: bodyBorder 15s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes bodyBorder {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3),
+                        0 0 10px rgba(0, 191, 255, 0.2),
+                        0 0 5px rgba(192, 192, 192, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: containerFade 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(192, 192, 192, 0.5), /* فضي */
+                rgba(0, 191, 255, 0.5), /* سماوي */
+                rgba(212, 175, 55, 0.5), /* ذهبي */
+                rgba(255, 215, 0, 0.5) /* ذهبي فاتح */);
+            background-size: 200% 200%;
+            border-radius: 22px;
+            animation: containerBorder 6s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes containerBorder {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        @keyframes containerFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #00BFFF 100%);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5),
+                        0 0 8px rgba(0, 191, 255, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            padding: 3px;
+        }
+        
+        .logo-container::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #C0C0C0, #00BFFF, #D4AF37, #FFD700);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6),
+                        0 0 12px rgba(0, 191, 255, 0.4);
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
+            background: #1a1a1a;
+        }
+        
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #C0C0C0, #00BFFF, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .title {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            font-weight: 500;
+        }
+        
+        .website {
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .website a {
+            color: #D4AF37;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .website a:hover {
+            color: #00BFFF;
+            text-decoration: underline;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #C0C0C0, #00BFFF, #D4AF37, transparent);
+            margin: 25px 0;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #D4AF37;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .section-title::before, .section-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00BFFF, #D4AF37, transparent);
+        }
+        
+        .section-title::before {
+            right: 100%;
+        }
+        
+        .section-title::after {
+            left: 100%;
+        }
+        
+        .links-list {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        
+        .link-item {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            margin-bottom: 15px;
+            padding: 15px 18px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(192, 192, 192, 0.1), rgba(0, 191, 255, 0.1), rgba(212, 175, 55, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .link-item:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .link-item:hover {
+            background: rgba(0, 191, 255, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 191, 255, 0.15);
+            border-color: rgba(0, 191, 255, 0.3);
+        }
+        
+        .link-icon {
+            width: 35px;
+            margin-left: 15px;
+            font-size: 24px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .link-item:hover .link-icon {
+            transform: scale(1.1);
+        }
+        
+        .link-text {
+            font-size: 16px;
+            text-align: right;
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .link-arrow {
+            font-size: 18px;
+            opacity: 0.8;
+            transition: transform 0.2s;
+            color: #00BFFF;
+        }
+        
+        .link-item:hover .link-arrow {
+            transform: translateX(-3px);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+        }
+        
+        .footer-links a {
+            color: #00BFFF;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        
+        .footer-links a:hover {
+            color: #D4AF37;
+            background: rgba(0, 191, 255, 0.1);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 18px;
+            }
+            
+            .name {
+                font-size: 24px;
+            }
+            
+            .title {
+                font-size: 16px;
+            }
+            
+            .website {
+                font-size: 14px;
+            }
+            
+            .link-item {
+                padding: 12px 15px;
+            }
+            
+            .logo-container {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .section-title::before, .section-title::after {
+                width: 25px;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* تأثيرات خفيفة للخلفية */
+        .glow-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+        }
+        
+        .glow-1 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #00BFFF 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+            animation: floatGlow 20s ease-in-out infinite;
+        }
+        
+        .glow-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #D4AF37 0%, transparent 70%);
+            bottom: 5%;
+            right: 15%;
+            animation: floatGlow 25s ease-in-out infinite reverse;
+        }
+        
+        .glow-3 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #C0C0C0 0%, transparent 70%);
+            top: 60%;
+            left: 20%;
+            animation: floatGlow 18s ease-in-out infinite;
+        }
+        
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-15px, 25px) scale(0.95); }
+        }
+        
+        /* تحسينات الأداء */
+        .container::before, .logo-container::before {
+            will-change: transform, background-position;
+        }
+        
+        .link-item::before {
+            will-change: transform;
+        }
+        
+        .glow {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+    
+    <div class="container">
+        <div class="logo-container floating">
+            <img src="https://i.ibb.co/LXvcSchG/file-000000002d1c624387a5a1f1a47611d6.png" 
+                 alt="Logo" 
+                 class="logo-img">
+        </div>
+        
+        <h1 class="name pulse">𓆩The Risky𓆪</h1>
+        <div class="title">مبدع محتوى وإبداع رقمي</div>
+        <p class="website">تابعني على: <a href="https://RiskyCreates.com">التلجرام يتم كسر التطبيقات </a></p>
+
+        
+        <div class="divider"></div>
+        
+        <h2 class="section-title">وسائل التواصل الاجتماعي</h2>
+        <div class="links-list">
+            <a href="https://www.tiktok.com/@the.risky14" class="link-item">
+                <div class="link-icon" style="color: #FF0050;">
+                    <i class="fab fa-tiktok"></i>
+                </div>
+                <span class="link-text">TikTok: @the.risky14</span>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <a href="https://t.me/Risky_Cheat" class="link-item">
+                <div class="link-icon" style="color: #0088cc;">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <span class="link-text">Telegram: @Risky_Cheat</span>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <a href="https://youtube.com/@the_risky?si=_P7VN32O6iVG1R1u" class="link-item">
+                <div class="link-icon" style="color: #FF0000;">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <span class="link-text">YouTube: @the_risky</span>
+                <span class="link-arrow">→</span>
+            </a>
+            
+            <a href="https://wa.me/qr/OQAQPUQAWW65K1" class="link-item">
+                <div class="link-icon" style="color: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <span class="link-text">WhatsApp</span>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>تابعني على وسائل التواصل الاجتماعي</p>
+            <div class="footer-links">
+                <a href="#">الخصوصية</a>
+                <a href="#">الشروط</a>
+                <a href="#">اتصل بي</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const linkItems = document.querySelectorAll('.link-item');
+            
+            linkItems.forEach((item, index) => {
+                item.style.opacity = "0";
+                item.style.transform = "translateY(15px)";
+                
+                setTimeout(() => {
+                    item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+                    item.style.opacity = "1";
+                    item.style.transform = "translateY(0)";
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>
